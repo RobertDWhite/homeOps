@@ -4,6 +4,7 @@ metadata:
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.28.0 (HEAD)
+    metallb.universe.tf/address-pool: default-pool
   creationTimestamp: null
   labels:
     io.kompose.service: app
