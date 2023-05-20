@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: default
+resources:
+  - ./app-claim0-persistentvolumeclaim.yaml
+  - ./app-claim1-persistentvolumeclaim.yaml
+  - ./app-deployment.sops.yaml
+  - ./app-service.yaml
+  - ./db-claim0-persistentvolumeclaim.yaml
+  - ./db-deployment.sops.yaml
+  - ./docker-default-networkpolicy.yaml
