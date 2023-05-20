@@ -7,6 +7,9 @@ metadata:
 spec:
   ipAddressPools:
     - default-pool
+    - iot-pool
+    - whitehouse-pool
+    - crypto-pool
 ---
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -16,3 +19,30 @@ metadata:
 spec:
   addresses:
     - "${METALLB_LB_RANGE}"
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: iot-pool
+  namespace: networking
+spec:
+  addresses:
+    - "10.100.7.103-10.100.7.118"
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: whitehouse-pool
+  namespace: networking
+spec:
+  addresses:
+    - "10.100.1.110-10.100.1.130"
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: crypto-pool
+  namespace: networking
+spec:
+  addresses:
+    - "10.99.5.50-10.99.5.70"
