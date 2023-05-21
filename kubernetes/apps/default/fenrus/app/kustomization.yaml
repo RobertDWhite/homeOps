@@ -5,5 +5,5 @@ namespace: default
 resources:
   - ./fenrus-claim0-persistentvolumeclaim.yaml
   - ./fenrus-default-networkpolicy.yaml
-  - ./fenrus-deployment.sops.yaml
+  - ./fenrus-deployment.yaml
   - ./fenrus-service.yaml
