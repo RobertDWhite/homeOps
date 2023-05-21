@@ -9,6 +9,8 @@ spec:
         - podSelector:
             matchLabels:
               io.kompose.network/fenrus-default: "true"
+            annotations:
+              external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
   podSelector:
     matchLabels:
       io.kompose.network/fenrus-default: "true"
