@@ -34,20 +34,20 @@ spec:
       - name: fenrus-claim0
         persistentVolumeClaim:
           claimName: fenrus-claim0
-  ingress:
-    main:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-        hajimari.io/icon: video-input-antenna
-      hosts:
-        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+          hajimari.io/icon: video-input-antenna
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "{{ .Release.Name }}.${SECRET_DOMAIN}"
   interval: 5m # Adjust as per your preference
   timeout: 5m # Adjust as per your preference
