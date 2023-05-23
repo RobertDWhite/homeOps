@@ -9,7 +9,7 @@ spec:
   releaseName: my-fenrus
   chart:
     spec:
-      chart: truecharts/fenrus
+      chart: my-fenrus
       version: 2.0.9
       sourceRef:
         kind: HelmRepository
