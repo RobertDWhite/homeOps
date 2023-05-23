@@ -5,29 +5,11 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.28.0 (HEAD)
     external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-    external-dns.alpha.kubernetes.io/hostname: "fenrus.${SECRET_DOMAIN}"
-  name: fenrus-ingress
-  hosts:
-    - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-  tls:
-    - hosts:
-        - *host
-spec:
-  rules:
-    - host: "fenrus.${SECRET_DOMAIN}"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: fenrus
-                port:
-                  number: 3000
   creationTimestamp: null
   labels:
     io.kompose.service: fenrus
   name: fenrus
+spec:
   replicas: 1
   selector:
     matchLabels:
