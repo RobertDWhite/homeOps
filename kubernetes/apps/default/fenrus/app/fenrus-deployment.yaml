@@ -1,51 +1,53 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
 metadata:
+  name: fenrus
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.28.0 (HEAD)
-    external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-  creationTimestamp: null
-  labels:
-    io.kompose.service: fenrus
-  name: fenrus
 spec:
-  replicas: 1
-  service:
-    main:
-      ports:
-        http:
-          port: &port 8080
-  selector:
-    matchLabels:
-      io.kompose.service: fenrus
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.28.0 (HEAD)
-      creationTimestamp: null
-      labels:
-        io.kompose.network/fenrus-default: "true"
-        io.kompose.service: fenrus
+  releaseName: fenrus
+  chart:
     spec:
-      containers:
-        - env:
-            - name: TZ
-              value: America/New_York
-          image: revenz/fenrus
-          name: fenrus
-          ports:
-            - containerPort: 3000
-          resources: {}
-          volumeMounts:
-            - mountPath: /app/data
-              name: fenrus-claim0
-      restartPolicy: Always
-      volumes:
-        - name: fenrus-claim0
-          persistentVolumeClaim:
-            claimName: fenrus-claim0
-status: {}
+      chart: fenrus
+      version: "1.0.0" # Replace with the desired chart version
+      sourceRef:
+        kind: GitRepository
+        name: fenrus
+        namespace: flux-system # Replace with the namespace where your GitRepository is located
+  values:
+    # Add any specific values for the Helm chart here
+    env:
+      - name: TZ
+        value: America/New_York
+    replicaCount: 1
+    containers:
+      - name: fenrus
+        image: revenz/fenrus
+        ports:
+          - containerPort: 3000
+        resources: {}
+        volumeMounts:
+          - mountPath: /app/data
+            name: fenrus-claim0
+    volumes:
+      - name: fenrus-claim0
+        persistentVolumeClaim:
+          claimName: fenrus-claim0
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+        hajimari.io/icon: video-input-antenna
+      hosts:
+        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+  interval: 5m # Adjust as per your preference
+  timeout: 5m # Adjust as per your preference
