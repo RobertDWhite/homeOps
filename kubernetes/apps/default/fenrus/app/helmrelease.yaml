@@ -6,7 +6,6 @@ metadata:
   namespace: default
 spec:
   interval: 15m
-  releaseName: my-fenrus
   chart:
     spec:
       chart: my-fenrus
