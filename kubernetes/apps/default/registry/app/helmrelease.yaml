@@ -5,6 +5,7 @@ metadata:
   name: registry
   namespace: default
 spec:
+  interval: 10m
   releaseName: my-docker-registry
   chart:
     spec:
