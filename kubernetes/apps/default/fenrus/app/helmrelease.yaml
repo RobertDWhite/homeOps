@@ -35,7 +35,7 @@ spec:
       main:
         ports:
           http:
-            port: &port 8080
+            port: &port 8090
     ingress:
       main:
         enabled: true
@@ -51,9 +51,3 @@ spec:
         tls:
           - hosts:
               - *host
-    resources:
-      requests:
-        cpu: 5m
-        memory: 10Mi
-      limits:
-        memory: 50Mi
