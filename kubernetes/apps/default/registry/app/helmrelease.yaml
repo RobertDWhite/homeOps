@@ -1,0 +1,45 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: my-docker-registry
+  namespace: default
+spec:
+  releaseName: my-docker-registry
+  chart:
+    spec:
+      chart: harbor
+      version: latest
+    sourceRef:
+      kind: HelmRepository
+      name: bitnami
+      namespace: flux-system
+  values:
+    expose:
+      type: loadBalancer
+      tls:
+        enabled: false
+      ingress:
+        enabled: true
+        hosts:
+          - host: <registry-host>
+            paths:
+              - /
+    persistence:
+      enabled: true
+      storageClass: <storage-class>
+      size: 10Gi
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "registry.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
