@@ -19,10 +19,6 @@ spec:
     - name: common
       repository: https://library-charts.truecharts.org
       version: 11.1.2
-  sources:
-    - https://github.com/truecharts/charts/tree/master/charts/incubator/fenrus
-    - https://hub.docker.com/r/revenz/fenrus
-    - http://fenrus.io
   maxHistory: 2
   install:
     createNamespace: true
