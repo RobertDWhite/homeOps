@@ -8,12 +8,24 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: my-fenrus
+      chart: truecharts/fenrus
       version: 2.0.9
-      sourceRef:
-        kind: HelmRepository
-        name: truecharts
-        namespace: flux-system
+    sourceRef:
+      kind: HelmRepository
+      name: truecharts
+      namespace: <namespace>
+      # Add any additional repository-specific details, such as URL or authentication
+  appVersion: latest
+  dependencies:
+    - name: common
+      repository: https://library-charts.truecharts.org
+      version: 11.1.2
+  sources:
+    - https://github.com/truecharts/charts/tree/master/charts/incubator/fenrus
+    - https://hub.docker.com/r/revenz/fenrus
+    - http://fenrus.io
+  type: application
+  version: 2.0.9
   maxHistory: 2
   install:
     createNamespace: true
