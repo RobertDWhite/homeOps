@@ -15,7 +15,6 @@ spec:
       name: truecharts
       namespace: flux-system
       # Add any additional repository-specific details, such as URL or authentication
-  appVersion: latest
   dependencies:
     - name: common
       repository: https://library-charts.truecharts.org
