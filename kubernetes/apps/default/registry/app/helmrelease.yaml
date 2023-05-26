@@ -8,8 +8,8 @@ spec:
   releaseName: my-docker-registry
   chart:
     spec:
-      chart: harbor
-      version: latest
+    chart: harbor
+    version: latest
     sourceRef:
       kind: HelmRepository
       name: bitnami
