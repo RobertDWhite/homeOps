@@ -8,12 +8,20 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: app-template
-      version: 1.5.0
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+      chart:
+        spec:
+          chart: truecharts/fenrus
+          version: 2.0.9
+  appVersion: latest
+  dependencies:
+    - name: common
+      repository: https://library-charts.truecharts.org
+      version: 11.1.2
+  sources:
+    - https://github.com/truecharts/charts/tree/master/charts/incubator/fenrus
+    - https://hub.docker.com/r/revenz/fenrus
+    - http://fenrus.io
+  type: application
   maxHistory: 2
   install:
     createNamespace: true
