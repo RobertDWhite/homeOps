@@ -8,11 +8,12 @@ spec:
   releaseName: my-docker-registry
   chart:
     spec:
-    chart: harbor
-    sourceRef:
-      kind: HelmRepository
-      name: bitnami
-      namespace: flux-system
+      chart: harbor
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      version: latest
   values:
     expose:
       type: loadBalancer
