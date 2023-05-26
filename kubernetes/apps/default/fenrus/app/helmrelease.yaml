@@ -29,13 +29,29 @@ spec:
     controller:
       strategy: RollingUpdate
     image:
+      pullPolicy: IfNotPresent
       repository: tccr.io/truecharts/fenrus
-      tag: 2.0.9
+      tag: latest@sha256:4ed64c6bf51aeb4a571eebf362ec3125e80a6a2cd7cbdf843fe24d0bd136d264
+    persistence:
+      data:
+        enabled: true
+        mountPath: /app/data
+      images:
+        enabled: true
+        mountPath: /app/wwwroot/images
+    podSecurityContext:
+      runAsGroup: 0
+      runAsUser: 0
+    securityContext:
+      readOnlyRootFilesystem: false
+      runAsNonRoot: false
     service:
       main:
         ports:
-          http:
-            port: &port 8090
+          main:
+            port: 3000
+            protocol: TCP
+            targetPort: 3000
     ingress:
       main:
         enabled: true
