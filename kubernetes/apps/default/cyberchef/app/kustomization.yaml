@@ -5,4 +5,4 @@ namespace: default
 resources:
   - ./cyberchef-default-networkpolicy.yaml
   - ./cyberchef-deployment.yaml
-  - ./imgress.yaml
+  - ./ingress.yaml
