@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+    hajimari.io/icon: video-input-antenna
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: cyberchef.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cyberchef
+                port:
+                  number: 8000
+  tls:
+    - hosts:
+        - cyberchef.${SECRET_DOMAIN}
