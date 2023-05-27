@@ -15,7 +15,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: home.${SECRET_DOMAIN}
+                name: home
                 port:
                   number: 3000
   tls:
