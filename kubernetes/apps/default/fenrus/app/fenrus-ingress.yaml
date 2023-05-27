@@ -21,4 +21,4 @@ spec:
   tls:
     - hosts:
         - home.${SECRET_DOMAIN}
-#      secretName: tls-secret
+      secretName: tls-secret
