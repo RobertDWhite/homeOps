@@ -12,9 +12,12 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: home
-              servicePort: 80
+              service:
+                name: home
+                port:
+                  number: 80
   tls:
     - hosts:
         - home.${SECRET_DOMAIN}
