@@ -16,8 +16,8 @@ spec:
             backend:
               service:
                 name: home
-     #           port:
-      #            number: 80
+                port:
+                  number: 3000
   tls:
     - hosts:
         - home.${SECRET_DOMAIN}
