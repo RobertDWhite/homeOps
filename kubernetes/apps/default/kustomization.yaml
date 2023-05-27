@@ -7,4 +7,3 @@ resources:
   - ./hajimari/ks.yaml
   - ./npm/ks.yaml
   - ./fenrus/ks.yaml
-  - ./registry/ks.yaml
