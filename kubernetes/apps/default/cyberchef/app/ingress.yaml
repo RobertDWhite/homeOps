@@ -5,11 +5,11 @@ metadata:
   name: cyberchef
   annotations:
     external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-    hajimari.io/icon: game-icons:cyber-eye
+    hajimari.io/icon: hammer-wrench
 spec:
   ingressClassName: nginx
   rules:
-    - host: &host "cyberchef.${SECRET_DOMAIN}"
+    - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -22,4 +22,5 @@ spec:
   tls:
     - hosts:
         - *host
+      secret: cyberchef-tls
 #

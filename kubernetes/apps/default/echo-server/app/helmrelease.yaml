@@ -66,6 +66,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secret: cyberchef-tls
     resources:
       requests:
         cpu: 5m
