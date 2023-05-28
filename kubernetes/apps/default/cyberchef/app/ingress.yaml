@@ -22,5 +22,4 @@ spec:
   tls:
     - hosts:
         - *host
-      secret: cyberchef-tls
 #
