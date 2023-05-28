@@ -1,8 +1,9 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/kustomize.config.k8s.io/kustomization_v1beta1.json
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: default
+namespace: services
 resources:
-  - ./cyberchef-default-networkpolicy.yaml
-  - ./cyberchef-deployment.yaml
-  - ./ingress.yaml
+  - ./helmrelease.yaml
+metadata:
+  namespace: services
