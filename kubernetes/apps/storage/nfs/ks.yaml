@@ -3,9 +3,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-nfs
-  namespace: flux-system
+  namespace: storage
 spec:
-  path: ./kubernetes/apps/flux-system/nfs/app
+  path: ./kubernetes/apps/storage/nfs/app
   prune: true
   sourceRef:
     kind: GitRepository
