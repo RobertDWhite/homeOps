@@ -2,7 +2,7 @@
 creation_rules:
   creation_rules:
   - path_regex: tmpl/kubernetes/.*\.sops\.ya?ml
-    encrypted_regex: "^(SECRET_NITTER_HMAC)$"
+    encrypted_regex: "^(HMAC)$"
     key_groups:
       - age:
           - age1u467mxj5svguevayv9vzq4c08yvj3yday2mx64quhql8vjecvqxq9rz9ql
