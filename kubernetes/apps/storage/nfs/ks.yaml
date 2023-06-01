@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-nfs
   namespace: storage
 spec:
-  path: ./kubernetes/apps/storage/nfs/app
+  path: ./kubernetes/apps/storage/nfs/app/
   prune: true
   sourceRef:
     kind: GitRepository
