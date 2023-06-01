@@ -3,12 +3,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-redis
+  name: cluster-apps-cyberchef
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: 'true'
 spec:
-  path: './kubernetes/apps/database/redis/app/'
+  path: ./kubernetes/apps/default/cyberchef/app/
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,5 +19,5 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: redis
-      namespace: database
+      name: cyberchef
+      namespace: default
