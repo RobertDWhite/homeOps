@@ -22,11 +22,11 @@ spec:
     remediation:
       retries: 3
       remediateLastFailure: true
-      # cleanupOnFail: true
+      cleanupOnFail: true
   rollback:
     timeout: 10m
     recreate: true
-    # cleanupOnFail: true
+    cleanupOnFail: true
   values:
     image:
       repository: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner
