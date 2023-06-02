@@ -5,7 +5,6 @@ resources:
   - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./external-dns.yaml
-  - ./external-dns-charts.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
   - ./ingress-nginx.yaml
