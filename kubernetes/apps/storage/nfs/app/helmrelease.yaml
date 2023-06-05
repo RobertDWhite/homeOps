@@ -33,6 +33,6 @@ spec:
       server: "10.100.1.20"
       path: "/volume2/kubernetes"
     storageClass:
-      name: nfs-kube
+      name: nfs
       defaultClass: false
       pathPattern: "/volume2/kubernetes"
