@@ -1,6 +1,5 @@
 ---
 creation_rules:
-  creation_rules:
   - path_regex: tmpl/kubernetes/.*\.sops\.ya?ml
     encrypted_regex: "^(stringData)$"
     key_groups:

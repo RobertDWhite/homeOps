@@ -1,10 +1,10 @@
 ---
 creation_rules:
-#  - path_regex: tmpl/kubernetes/.*\.sops\.ya?ml
-##    encrypted_regex: "^(SECRET_NITTER_HMAC)$"
-  #  key_groups:
-   #   - age:
-    #      - age1u467mxj5svguevayv9vzq4c08yvj3yday2mx64quhql8vjecvqxq9rz9ql
+  - path_regex: tmpl/kubernetes/.*\.sops\.ya?ml
+    encrypted_regex: "^(SECRET_NITTER_HMAC)$"
+    key_groups:
+      - age:
+          - age1u467mxj5svguevayv9vzq4c08yvj3yday2mx64quhql8vjecvqxq9rz9ql
   - path_regex: kubernetes/apps/default/npm.*\.sops\.ya?ml
     encrypted_regex: "^(value)$"
     key_groups:
