@@ -42,24 +42,32 @@ spec:
 
     authentik:
       log_level: trace
-      secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
+      secret_key:
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secret
+            key: authentik_secret_key
       error_reporting:
         enabled: true
         environment: "kryptonian"
       postgresql:
-        host: "192.168.2.2"
+        host: "postgres.database.svc.cluster.local"
         name: "authentik"
         user: "authentik"
-        password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+        password:
+          valueFrom:
+            secretKeyRef:
+              name: authentik-secret
+              key: postgres_password
       redis:
-        host: "redis.databases.svc.cluster.local"
+        host: "redis.database.svc.cluster.local"
       email:
-        host: "mailer.skylab.fi"
-        port: 587
+        host: "10.100.1.5"
+        port: 25
         use_tls: true
-        username: "samipsolutions/authentik"
-        password: "${SECRET_AUHENTIK_POSTAL_PASSWORD}"
-        from: "no-reply@skylab.fi"
+        # username: "samipsolutions/authentik"
+        # password: "${SECRET_AUHENTIK_POSTAL_PASSWORD}"
+        # from: "no-reply@123.com"
 
     ingress:
       enabled: true
@@ -69,13 +77,13 @@ spec:
         external-dns-cf/is-dns-public: "true"
         # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
       hosts:
-        - host: "auth.whitelabs.tech"
+        - host: "auth.${SECRET_DOMAIN}"
           paths:
-        - path: "/"
-          pathType: Prefix
+            - path: "/"
+              pathType: Prefix
       tls:
         - hosts:
-        - "auth.whitelabs.tech"
+        - "auth.${SECRET_DOMAIN}"
         # secretName: skylab.fi-tls
     postgresql:
       enabled: false
