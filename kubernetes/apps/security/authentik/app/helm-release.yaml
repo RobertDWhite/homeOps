@@ -79,12 +79,10 @@ spec:
       hosts:
         - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
           paths:
-            - path: "/"
-              pathType: Prefix
+            - path: /
       tls:
         - hosts:
             - *host
-        # secretName: skylab.fi-tls
     postgresql:
       enabled: false
     redis:
