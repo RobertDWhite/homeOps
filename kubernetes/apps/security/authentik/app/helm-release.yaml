@@ -39,7 +39,21 @@ spec:
       # repository: ghcr.io/goauthentik/dev-server
       # tag: gh-next
       pullPolicy: Always
-
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          external-dns-cf/is-dns-public: "true"
+        # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *host
     authentik:
       log_level: trace
       secret_key:
@@ -69,20 +83,6 @@ spec:
         # password: "${SECRET_AUHENTIK_POSTAL_PASSWORD}"
         # from: "no-reply@123.com"
 
-    ingress:
-      enabled: true
-      ingressClassName: "nginx"
-      annotations:
-        external-dns.home.arpa/enabled: "true"
-        external-dns-cf/is-dns-public: "true"
-        # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
-      hosts:
-        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-      tls:
-        - hosts:
-            - *host
     postgresql:
       enabled: false
     redis:
