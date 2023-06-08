@@ -83,7 +83,7 @@ spec:
               pathType: Prefix
       tls:
         - hosts:
-        - "auth.${SECRET_DOMAIN}"
+            - "auth.${SECRET_DOMAIN}"
         # secretName: skylab.fi-tls
     postgresql:
       enabled: false
