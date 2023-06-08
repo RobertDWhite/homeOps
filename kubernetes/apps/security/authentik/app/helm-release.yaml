@@ -77,13 +77,13 @@ spec:
         external-dns-cf/is-dns-public: "true"
         # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
       hosts:
-        - host: "auth.${SECRET_DOMAIN}"
+        - host: &host "auth.${SECRET_DOMAIN}"
           paths:
             - path: "/"
               pathType: Prefix
       tls:
         - hosts:
-            - "auth.${SECRET_DOMAIN}"
+            - *host
         # secretName: skylab.fi-tls
     postgresql:
       enabled: false
