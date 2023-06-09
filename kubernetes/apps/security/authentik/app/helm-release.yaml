@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://charts.goauthentik.io
       chart: authentik
       version: 2023.5.3
       sourceRef:
@@ -29,33 +28,25 @@ spec:
     recreate: true
     cleanupOnFail: true
   values:
-    outposts:
-      docker_image_base: ghcr.io/goauthentik/%(type)s
-      # docker_image_base: ghcr.io/goauthentik/dev-%(type)s:gh-next
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2023.5.3
-      # repository: ghcr.io/goauthentik/dev-server
-      # tag: gh-next
+      tag: 2023.5.2
       pullPolicy: Always
     ingress:
-      main:
-        enabled: true
-        ingressClassName: "nginx"
-        annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: lock
-          external-dns.home.arpa/enabled: "true"
-          external-dns-cf/is-dns-public: "true"
-        # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
-        hosts:
-          - host: &host "auth.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-        tls:
-          - hosts:
-              - *host
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        external-dns.home.arpa/enabled: "true"
+        external-dns-cf/is-dns-public: "true"
+      hosts:
+        - host: auth.whitelabs.tech
+          paths:
+            - path: /
+      tls:
+        - secretName: auth-tls-secret
+          hosts:
+            - auth.whitelabs.tech
     authentik:
       log_level: trace
       secret_key:
@@ -65,38 +56,21 @@ spec:
             key: authentik_secret_key
       error_reporting:
         enabled: true
-        environment: "kryptonian"
+        environment: kryptonian
       postgresql:
-        host: "postgres.database.svc.cluster.local"
-        name: "authentik"
-        user: "authentik"
+        enabled: true
+        host: postgres.database.svc.cluster.local
+        name: authentik
+        user: authentik
         password:
           valueFrom:
             secretKeyRef:
               name: authentik-secret
               key: postgres_password
       redis:
-        host: "redis.database.svc.cluster.local"
+        enabled: true
+        host: redis.database.svc.cluster.local
       email:
-        host: "10.100.1.5"
+        host: 10.100.1.5
         port: 25
         use_tls: true
-        # username: "samipsolutions/authentik"
-        # password: "${SECRET_AUHENTIK_POSTAL_PASSWORD}"
-        # from: "no-reply@123.com"
-
-    postgresql:
-      enabled: false
-    redis:
-      enabled: false
-
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 50
-            preference:
-              matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
