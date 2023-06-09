@@ -43,10 +43,10 @@ spec:
         - host: auth.whitelabs.tech
           paths:
             - path: /
-      tls:
-        - secretName: auth-tls-secret
-          hosts:
-            - auth.whitelabs.tech
+          tls:
+            - secretName: auth-tls-secret
+              hosts:
+                - auth.whitelabs.tech
     authentik:
       log_level: trace
       secret_key:
