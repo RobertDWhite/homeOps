@@ -35,7 +35,7 @@ spec:
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2023.5.2
+      tag: 2023.5.3
       # repository: ghcr.io/goauthentik/dev-server
       # tag: gh-next
       pullPolicy: Always
@@ -44,6 +44,8 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: lock
           external-dns.home.arpa/enabled: "true"
           external-dns-cf/is-dns-public: "true"
         # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
