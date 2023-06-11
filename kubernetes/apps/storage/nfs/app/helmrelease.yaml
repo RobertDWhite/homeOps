@@ -22,3 +22,6 @@ spec:
     nfs:
       server: "10.100.1.20"
       path: "/volume2/kubernetes"
+    storageClass:
+      pathPattern: "${.PVC.namespace}-${.PVC.name}"
+      defaultClass: true
