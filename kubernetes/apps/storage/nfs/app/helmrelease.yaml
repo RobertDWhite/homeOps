@@ -24,4 +24,5 @@ spec:
       path: "/volume2/kubernetes"
     storageClass:
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
-      defaultClass: true
+      defaultClass: false
+      name: nfs-kube
