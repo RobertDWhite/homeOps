@@ -34,18 +34,19 @@ spec:
       tag: 2023.5.2
       pullPolicy: Always
     ingress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        external-dns.home.arpa/enabled: "true"
-        external-dns-cf/is-dns-public: "true"
-      hosts:
-        - host: auth.whitelabs.tech
-          paths:
-            - path: /
-      tls:
-        - hosts:
-            - auth.whitelabs.tech
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          external-dns-cf/is-dns-public: "true"
+        hosts:
+          - host: &host "auth.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *host
     authentik:
       log_level: trace
       secret_key:
