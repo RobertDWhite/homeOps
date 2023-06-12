@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nfs-subdir
+  name: nfs-subdir-external-provisioner
   namespace: storage
 spec:
   interval: 10m
@@ -25,4 +25,4 @@ spec:
     storageClass:
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
       defaultClass: false
-      name: nfs-kube
+      name: nfs-client
