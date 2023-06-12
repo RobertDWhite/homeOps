@@ -25,4 +25,4 @@ spec:
       path: "/volume2/kubernetes"
     storageClass:
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
-      defaultClass: false
+      defaultClass: true
