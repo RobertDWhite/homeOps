@@ -26,4 +26,3 @@ spec:
     storageClass:
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
       defaultClass: false
-      name: nfs-client
