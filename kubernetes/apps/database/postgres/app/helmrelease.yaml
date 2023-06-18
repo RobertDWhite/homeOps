@@ -18,6 +18,7 @@ spec:
   values:
     containerSecurityContext:
       runAsUser: 0
+    primary:
       initdb:
         scripts:
           init-authentik.sql: |
