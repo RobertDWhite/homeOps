@@ -19,6 +19,9 @@ spec:
     containerSecurityContext:
       runAsUser: 0
     primary:
+      persistence:
+        enabled: true
+        existingClaim: postgresql01
       initdb:
         scripts:
           init-authentik.sql: |
