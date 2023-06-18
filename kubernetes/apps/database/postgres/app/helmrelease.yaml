@@ -5,7 +5,7 @@ metadata:
   name: postgresql
   namespace: database
 spec:
-  interval: 5m
+  interval: 6m
   chart:
     spec:
       chart: postgresql
