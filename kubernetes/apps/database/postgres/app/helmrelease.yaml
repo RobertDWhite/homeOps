@@ -21,7 +21,7 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: postgresql
+        existingClaim: postgresql-v01
       initdb:
         scripts:
           init-authentik.sql: |
