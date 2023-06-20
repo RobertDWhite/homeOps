@@ -9,15 +9,17 @@ spec:
   chart:
     spec:
       chart: postgresql
-      version: 12.5.6
+      version: 15.3.0
       sourceRef:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
       interval: 5m
   values:
-    containerSecurityContext:
-      runAsUser: 0
+    auth:
+      enablePostgresUser: true
+      postgresPassword: ${SECRET_POSTGRES_ADMIN_PASS}
+      database: postgres
     primary:
       persistence:
         enabled: true
@@ -27,12 +29,6 @@ spec:
           init-authentik.sql: |
             CREATE ROLE "authentik" WITH LOGIN PASSWORD '$SECRET_AUTHENTIK_DATABASE_PASSWORD';
             CREATE DATABASE authentik WITH OWNER 'authentik' ENCODING 'UTF8' TEMPLATE template0;
-      resources:
-        requests:
-          cpu: 15m
-          memory: 226M
-        limits:
-          memory: 226M
   valuesFrom:
     - kind: Secret
       name: postgres
