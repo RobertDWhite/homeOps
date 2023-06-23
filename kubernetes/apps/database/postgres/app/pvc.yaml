@@ -2,11 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgresql001
-  namespace: database
-spec:
-  accessModes:
-    - ReadWriteMany
+  name: postgresqlv1
   resources:
     requests:
       storage: 10Gi
