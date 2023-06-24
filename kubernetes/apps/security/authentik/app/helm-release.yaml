@@ -46,7 +46,7 @@ spec:
             paths:
               - path: /
         tls:
-          - host:
+          - hosts:
               - *host
     authentik:
       log_level: trace
