@@ -16,8 +16,7 @@ spec:
         namespace: flux-system
       interval: 5m
   install:
-    spec:
-      replicas: 2
+    replicas: 2
     remediation:
       retries: 5
   upgrade:
