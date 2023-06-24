@@ -33,6 +33,7 @@ spec:
       repository: ghcr.io/goauthentik/server
       tag: 2023.5.4
       pullPolicy: Always
+    replicas: 2
     ingress:
       enabled: true
       ingressClassName: nginx
