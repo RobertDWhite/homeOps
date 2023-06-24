@@ -59,7 +59,7 @@ spec:
         environment: kryptonian
       postgresql:
         enabled: true
-        host: postgres.database.svc.cluster.local
+        host: postgresqlv1.database.svc.cluster.local
         name: authentik
         user: authentik
         password:
