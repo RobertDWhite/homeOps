@@ -10,3 +10,6 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs-client
+  resources:
+    requests:
+      storage: 10Gi
