@@ -34,6 +34,28 @@ spec:
       tag: 2023.5.4
       pullPolicy: Always
     replicas: 2
+    initContainers:
+      init-db:
+        image: ghcr.io/onedr0p/postgres-initdb:14.8
+        env:
+          - name: POSTGRES_HOST
+            value: postgres-auth.databases.svc.cluster.local.
+          - name: POSTGRES_DB
+            value: authentik
+          - name: POSTGRES_SUPER_PASS
+            valueFrom:
+              secretKeyRef:
+                name: authentik-secret
+                key: postgres_password
+          - name: POSTGRES_SUPER_USER
+            value: 'authentik'
+          - name: POSTGRES_USER
+            value: 'authentik'
+          - name: POSTGRES_PASS
+            valueFrom:
+              secretKeyRef:
+                name: authentik-secret
+                key: postgres_password
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -63,7 +85,7 @@ spec:
         environment: kryptonian
       postgresql:
         enabled: true
-        host: postgresqlv1.database.svc.cluster.local
+        host: postgres-auth.databases.svc.cluster.local
         name: authentik
         user: authentik
         port: 5432
